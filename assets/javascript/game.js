@@ -11,28 +11,34 @@ var guessLeftText = document.getElementById("guessLeft-text");
 var userGuessesText = document.getElementById("userGuesses-text");
 
 var computerGuess="";
+var wrongGuesses = [];
 
 document.onkeyup = function(event) { 
 
     var userGuess = event.key;
+
     if(guessLeft==9){computerGuess = computerLetter[Math.floor(Math.random() * computerLetter.length)];
     }
 
      if (userGuess === computerGuess){
          wins++;
          guessLeft=9;
+         wrongGuesses = []
 
-     } else if (guessLeft>1){guessLeft--;}
+     } else if (guessLeft>1){guessLeft--;   
+        wrongGuesses.push(userGuess);
+    }
      
      else{     
         losses++;
         guessLeft=9; 
+        wrongGuesses = []
         }
  
        winsText.textContent = "Wins: "+wins;
        lossesText.textContent = "Losses: "+losses;
         guessLeftText.textContent = "Guesses Left: "+guessLeft;
-       userGuessesText.textContent = "Your Guesses so far: "+ userGuess
+       userGuessesText.textContent= "Your Guesses so far: "+ wrongGuesses.join(" ");
     
   
   
